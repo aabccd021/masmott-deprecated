@@ -1,6 +1,6 @@
 import { Left, Right, Some } from 'trimop';
 
-import { Doc, NumberField, RefField, StringField, SyncedFields } from '../src';
+import { Doc, NumberField, RefField, stringField, SyncedFields } from '../src';
 import { filterSyncedFields, FilterSyncedFieldsError } from '../src/filter-synced-fields';
 
 describe('filterSyncedFields', () => {
@@ -9,22 +9,22 @@ describe('filterSyncedFields', () => {
       joinedYear: NumberField(2020),
       mentor: RefField({
         doc: {
-          name: StringField('Akane Moriya'),
+          name: stringField('Akane Moriya'),
           origin: RefField({
             doc: {
-              food: StringField('Kakigori'),
-              region: StringField('East Japan'),
+              food: stringField('Kakigori'),
+              region: stringField('East Japan'),
             },
             id: 'miyagi',
           }),
-          position: StringField('Sergeant'),
+          position: stringField('Sergeant'),
         },
         id: 'akanen',
       }),
-      name: StringField('Masumoto Kira'),
+      name: stringField('Masumoto Kira'),
       oshi: RefField({
         doc: {
-          name: StringField('Yuuka Sugai'),
+          name: stringField('Yuuka Sugai'),
         },
         id: 'yukka',
       }),
@@ -50,11 +50,11 @@ describe('filterSyncedFields', () => {
             doc: {
               origin: RefField({
                 doc: {
-                  region: StringField('East Japan'),
+                  region: stringField('East Japan'),
                 },
                 id: 'miyagi',
               }),
-              position: StringField('Sergeant'),
+              position: stringField('Sergeant'),
             },
             id: 'akanen',
           }),
@@ -65,7 +65,7 @@ describe('filterSyncedFields', () => {
 
   it('returns filterSyncedFieldsError if given other than refField on nested sync', () => {
     const doc: Doc = {
-      mentor: StringField('Akane Moriya'),
+      mentor: stringField('Akane Moriya'),
     };
     const syncedFields: SyncedFields = {
       mentor: {
@@ -73,7 +73,7 @@ describe('filterSyncedFields', () => {
       },
     };
     expect(filterSyncedFields({ doc, syncedFields })).toStrictEqual(
-      Left(FilterSyncedFieldsError(StringField('Akane Moriya')))
+      Left(FilterSyncedFieldsError(stringField('Akane Moriya')))
     );
   });
 });

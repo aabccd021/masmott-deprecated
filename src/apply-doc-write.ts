@@ -1,17 +1,14 @@
 import {
   Either,
-  eitherArrayReduce,
-  eitherMapRight,
-  Left,
+  E,
   None,
   Option,
-  optionFold,
-  optionFromNullable,
+  O,
   Right,
   Some,
-} from 'trimop';
+} from 'kira-pure';
 
-import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } from './data';
+import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } from './type/data';
 
 /**
  * ApplyDocWriteError

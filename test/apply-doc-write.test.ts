@@ -11,7 +11,7 @@ import {
   NumberField,
   RefField,
   RefUpdateField,
-  StringField,
+  stringField,
   WriteDoc,
 } from '../src';
 import { applyDocWrite, ApplyDocWriteError } from '../src/apply-doc-write';
@@ -24,13 +24,13 @@ describe('applyDocWrite', () => {
       favoriteNumber: NumberField(7),
       group: RefField({
         doc: {
-          name: StringField('Keyakizaka46'),
+          name: stringField('Keyakizaka46'),
         },
         id: 'keyakizaka',
       }),
       hobby: RefField({
         doc: {
-          name: StringField('Rubiks Cube'),
+          name: stringField('Rubiks Cube'),
           record: NumberField(60),
         },
         id: 'rubiks',
@@ -38,12 +38,12 @@ describe('applyDocWrite', () => {
       latestBlogUpdate: DateField(new Date('2020-09-12T00:00:00Z')),
       mentor: RefField({
         doc: {
-          name: StringField('Akanen'),
+          name: stringField('Akanen'),
         },
         id: 'akanen',
       }),
-      name: StringField('Kira Masumoto'),
-      nickname: StringField('dorokatsu'),
+      name: stringField('Kira Masumoto'),
+      nickname: stringField('dorokatsu'),
       profilePicture: ImageField({
         url: 'https://sakurazaka46.com/images/14/7ef/aa0bc399d68377e1e6611efb802b4.jpg',
       }),
@@ -57,7 +57,7 @@ describe('applyDocWrite', () => {
         logoPicture: ImageField({
           url: 'https://sakurazaka46.com/files/14/s46/img/com-logo_sp.svg',
         }),
-        name: StringField('Sakurazaka46'),
+        name: stringField('Sakurazaka46'),
       }),
       hobby: RefUpdateField({
         record: NumberField(40),
@@ -66,14 +66,14 @@ describe('applyDocWrite', () => {
       latestBlogUpdate: DateField(new Date('2021-01-01T00:00:00Z')),
       mentor: RefField({
         doc: {
-          name: StringField('Moriya Akane'),
+          name: stringField('Moriya Akane'),
         },
         id: 'akanen',
       }),
-      nickname: StringField('Kirako'),
+      nickname: stringField('Kirako'),
       origin: RefField({
         doc: {
-          region: StringField('kansai'),
+          region: stringField('kansai'),
         },
         id: 'hyougo',
       }),
@@ -96,13 +96,13 @@ describe('applyDocWrite', () => {
             logoPicture: ImageField({
               url: 'https://sakurazaka46.com/files/14/s46/img/com-logo_sp.svg',
             }),
-            name: StringField('Sakurazaka46'),
+            name: stringField('Sakurazaka46'),
           },
           id: 'keyakizaka',
         }),
         hobby: RefField({
           doc: {
-            name: StringField('Rubiks Cube'),
+            name: stringField('Rubiks Cube'),
             record: NumberField(40),
           },
           id: 'rubiks',
@@ -111,15 +111,15 @@ describe('applyDocWrite', () => {
         latestBlogUpdate: DateField(new Date('2021-01-01T00:00:00Z')),
         mentor: RefField({
           doc: {
-            name: StringField('Moriya Akane'),
+            name: stringField('Moriya Akane'),
           },
           id: 'akanen',
         }),
-        name: StringField('Kira Masumoto'),
-        nickname: StringField('Kirako'),
+        name: stringField('Kira Masumoto'),
+        nickname: stringField('Kirako'),
         origin: RefField({
           doc: {
-            region: StringField('kansai'),
+            region: stringField('kansai'),
           },
           id: 'hyougo',
         }),
@@ -132,13 +132,13 @@ describe('applyDocWrite', () => {
   describe('IncrementField', () => {
     it('fails to increment if previous value is not a NumberField', () => {
       const doc: Some<Doc> = Some({
-        groupName: StringField('Sakurazaka46'),
+        groupName: stringField('Sakurazaka46'),
       });
       const writeDoc: WriteDoc = {
         groupName: IncrementField(2),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
-        Left(ApplyDocWriteError(Some(StringField('Sakurazaka46'))))
+        Left(ApplyDocWriteError(Some(stringField('Sakurazaka46'))))
       );
     });
   });
@@ -146,22 +146,22 @@ describe('applyDocWrite', () => {
   describe('RefUpdateField', () => {
     it('returns ApplyDocWriteError if previous value is not a RefField', () => {
       const doc: Some<Doc> = Some({
-        group: StringField('Keyakizaka46'),
+        group: stringField('Keyakizaka46'),
       });
       const writeDoc: WriteDoc = {
         group: RefUpdateField({
-          name: StringField('Sakurazaka46'),
+          name: stringField('Sakurazaka46'),
         }),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
-        Left(ApplyDocWriteError(Some(StringField('Keyakizaka46'))))
+        Left(ApplyDocWriteError(Some(stringField('Keyakizaka46'))))
       );
     });
 
     it('returns ApplyDocWriteError if previous value is none', () => {
       const writeDoc: WriteDoc = {
         group: RefUpdateField({
-          name: StringField('Sakurazaka46'),
+          name: stringField('Sakurazaka46'),
         }),
       };
       expect(applyDocWrite({ doc: Some({}), writeDoc })).toStrictEqual(
@@ -176,7 +176,7 @@ describe('applyDocWrite', () => {
         joinYear: NumberField(2020),
       });
       const writeDoc: WriteDoc = {
-        joinYear: StringField('2020'),
+        joinYear: stringField('2020'),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
         Left(ApplyDocWriteError(Some(NumberField(2020))))
@@ -187,19 +187,19 @@ describe('applyDocWrite', () => {
   describe('RefField', () => {
     it('returns ApplyDocWriteError if previous value is not RefField', () => {
       const doc: Some<Doc> = Some({
-        hobby: StringField('rubiks'),
+        hobby: stringField('rubiks'),
       });
       const writeDoc: WriteDoc = {
         hobby: RefField({
           doc: {
-            name: StringField('Rubiks Cube'),
+            name: stringField('Rubiks Cube'),
             record: NumberField(60),
           },
           id: 'rubiks',
         }),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
-        Left(ApplyDocWriteError(Some(StringField('rubiks'))))
+        Left(ApplyDocWriteError(Some(stringField('rubiks'))))
       );
     });
   });
@@ -207,13 +207,13 @@ describe('applyDocWrite', () => {
   describe('NumberField', () => {
     it('returns ApplyDocWriteError if previous value is not NumberField', () => {
       const doc: Some<Doc> = Some({
-        name: StringField('Masumoto Kira'),
+        name: stringField('Masumoto Kira'),
       });
       const writeDoc: WriteDoc = {
         name: NumberField(21),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
-        Left(ApplyDocWriteError(Some(StringField('Masumoto Kira'))))
+        Left(ApplyDocWriteError(Some(stringField('Masumoto Kira'))))
       );
     });
   });
@@ -221,7 +221,7 @@ describe('applyDocWrite', () => {
   describe('ImageField', () => {
     it('returns ApplyDocWriteError if previous value is not ImageField', () => {
       const doc: Some<Doc> = Some({
-        name: StringField('Masumoto Kira'),
+        name: stringField('Masumoto Kira'),
       });
       const writeDoc: WriteDoc = {
         name: ImageField({
@@ -229,7 +229,7 @@ describe('applyDocWrite', () => {
         }),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
-        Left(ApplyDocWriteError(Some(StringField('Masumoto Kira'))))
+        Left(ApplyDocWriteError(Some(stringField('Masumoto Kira'))))
       );
     });
   });
@@ -237,13 +237,13 @@ describe('applyDocWrite', () => {
   describe('DateField', () => {
     it('returns ApplyDocWriteError if previous value is not DateField', () => {
       const doc: Some<Doc> = Some({
-        name: StringField('Masumoto Kira'),
+        name: stringField('Masumoto Kira'),
       });
       const writeDoc: WriteDoc = {
         name: DateField(new Date()),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
-        Left(ApplyDocWriteError(Some(StringField('Masumoto Kira'))))
+        Left(ApplyDocWriteError(Some(stringField('Masumoto Kira'))))
       );
     });
   });
@@ -251,24 +251,24 @@ describe('applyDocWrite', () => {
   describe('CreationTimeField', () => {
     it('returns ApplyDocWriteError if previous value is not none', () => {
       const doc: Some<Doc> = Some({
-        name: StringField('Masumoto Kira'),
+        name: stringField('Masumoto Kira'),
       });
       const writeDoc: WriteDoc = {
         name: CreationTimeField(),
       };
       expect(applyDocWrite({ doc, writeDoc })).toStrictEqual(
-        Left(ApplyDocWriteError(Some(StringField('Masumoto Kira'))))
+        Left(ApplyDocWriteError(Some(stringField('Masumoto Kira'))))
       );
     });
   });
 
   it('just write if previous doc is empty', () => {
     const writeDoc: WriteDoc = {
-      name: StringField('Kira Masumoto'),
+      name: stringField('Kira Masumoto'),
     };
     expect(applyDocWrite({ doc: None(), writeDoc })).toStrictEqual(
       Right({
-        name: StringField('Kira Masumoto'),
+        name: stringField('Kira Masumoto'),
       })
     );
   });

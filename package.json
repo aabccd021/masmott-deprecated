@@ -5,18 +5,19 @@
   "author": "aabccd021 <aabccd021@gmail.com>",
   "license": "MIT",
   "files": [
-    "dist"
+    "lib",
+    "es6"
   ],
   "main": "lib/index.js",
   "module": "es6/index.js",
   "exports": {
     ".": {
-      "node": "./dist/cjs/index.js",
-      "default": "./dist/mjs/index.js"
+      "node": "./lib/index.js",
+      "default": "./es6/index.js"
     }
   },
   "scripts": {
-    "build": "rm -rf dist && tsc --build tsconfig.mjs.json && tsc --build tsconfig.cjs.json",
+    "build": "rm -rf lib && rm -rf es6 && tsc --build tsconfig.es6.json && tsc --build tsconfig.lib.json",
     "lint": "eslint . --ext ts",
     "test": "jest --coverage --verbose",
     "latest": "yarn upgrade-interactive --latest",
@@ -24,6 +25,7 @@
     "pull-request": "git pull origin main --no-edit && npm version patch && git push && yarn open-cli https://github.com/aabccd021/masmott/compare/main...$(git branch --show-current)"
   },
   "dependencies": {
+    "kira-pure": "^0.1.14",
     "trimop": "0.1.13"
   },
   "devDependencies": {
@@ -66,7 +68,7 @@
   "eslintConfig": {
     "ignorePatterns": [
       "lib/**",
-      "dist/**"
+      "es6/**"
     ],
     "parser": "@typescript-eslint/parser",
     "plugins": [
@@ -102,6 +104,15 @@
         "rules": {
           "no-null/no-null": "off",
           "functional/prefer-readonly-type": "off"
+        }
+      },
+      {
+        "files": [
+          "src/sum-type/**/*.ts",
+          "src/type/**/*.ts"
+        ],
+        "rules": {
+          "import/no-cycle": "off"
         }
       }
     ],
@@ -149,7 +160,6 @@
       "import/exports-last": "warn",
       "import/first": "warn",
       "import/no-named-default": "warn",
-      "import/no-namespace": "warn",
       "import/no-useless-path-segments": "warn",
       "no-null/no-null": "warn",
       "simple-import-sort/exports": "warn",

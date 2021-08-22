@@ -1,10 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "module": "es2015",
     "moduleResolution": "node",
-    "outDir": "./dist/mjs",
+    "outDir": "./es6",
   },
   "exclude": [
     "test"

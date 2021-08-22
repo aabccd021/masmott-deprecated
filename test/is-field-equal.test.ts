@@ -1,29 +1,29 @@
 import { None, Some } from 'trimop';
 
-import { DateField, ImageField, isFieldEqual, NumberField, RefField, StringField } from '../src';
+import { DateField, ImageField, isFieldEqual, NumberField, RefField, stringField } from '../src';
 
 describe('isFieldEqual', () => {
   describe('StringField', () => {
     it('returns true if given same value', () => {
-      const f1 = StringField('foo');
-      const f2 = Some(StringField('foo'));
+      const f1 = stringField('foo');
+      const f2 = Some(stringField('foo'));
       expect(isFieldEqual(f1, f2)).toStrictEqual(true);
     });
 
     it('returns false if given different value (2)', () => {
-      const f1 = StringField('Keyakizaka46 renamed to Sakurazaka46');
-      const f2 = Some(StringField('Keyakizaka renamed to Sakurazaka'));
+      const f1 = stringField('Keyakizaka46 renamed to Sakurazaka46');
+      const f2 = Some(stringField('Keyakizaka renamed to Sakurazaka'));
       expect(isFieldEqual(f1, f2)).toStrictEqual(false);
     });
 
     it('returns false if given different value', () => {
-      const f1 = StringField('foo');
-      const f2 = Some(StringField('bar'));
+      const f1 = stringField('foo');
+      const f2 = Some(stringField('bar'));
       expect(isFieldEqual(f1, f2)).toStrictEqual(false);
     });
 
     it('returns false if given f2 none', () => {
-      const f1 = StringField('foo');
+      const f1 = stringField('foo');
       const f2 = None();
       expect(isFieldEqual(f1, f2)).toStrictEqual(false);
     });
@@ -101,19 +101,19 @@ describe('isFieldEqual', () => {
 
   describe('RefField', () => {
     it('returns true if given same value', () => {
-      const f1 = RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' });
-      const f2 = Some(RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' }));
+      const f1 = RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' });
+      const f2 = Some(RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' }));
       expect(isFieldEqual(f1, f2)).toStrictEqual(true);
     });
 
     it('returns true if given same value nested', () => {
       const f1 = RefField({
-        doc: { owner: RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' }) },
+        doc: { owner: RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' }) },
         id: '21',
       });
       const f2 = Some(
         RefField({
-          doc: { owner: RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' }) },
+          doc: { owner: RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' }) },
           id: '21',
         })
       );
@@ -121,19 +121,19 @@ describe('isFieldEqual', () => {
     });
 
     it('returns false if given different id', () => {
-      const f1 = RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' });
-      const f2 = Some(RefField({ doc: { name: StringField('Kira Masumoto') }, id: '21' }));
+      const f1 = RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' });
+      const f2 = Some(RefField({ doc: { name: stringField('Kira Masumoto') }, id: '21' }));
       expect(isFieldEqual(f1, f2)).toStrictEqual(false);
     });
 
     it('returns false if f1 is part of f2', () => {
       const f1 = RefField({
-        doc: { name: StringField('Kira Masumoto') },
+        doc: { name: stringField('Kira Masumoto') },
         id: '46',
       });
       const f2 = Some(
         RefField({
-          doc: { age: NumberField(21), name: StringField('Kira Masumoto') },
+          doc: { age: NumberField(21), name: stringField('Kira Masumoto') },
           id: '46',
         })
       );
@@ -142,12 +142,12 @@ describe('isFieldEqual', () => {
 
     it('returns false if f2 is part of f1', () => {
       const f1 = RefField({
-        doc: { age: NumberField(21), name: StringField('Kira Masumoto') },
+        doc: { age: NumberField(21), name: stringField('Kira Masumoto') },
         id: '46',
       });
       const f2 = Some(
         RefField({
-          doc: { name: StringField('Kira Masumoto') },
+          doc: { name: stringField('Kira Masumoto') },
           id: '46',
         })
       );
@@ -155,19 +155,19 @@ describe('isFieldEqual', () => {
     });
 
     it('returns false if given different subfield value', () => {
-      const f1 = RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' });
-      const f2 = Some(RefField({ doc: { name: StringField('Karin Fujiyoshi') }, id: '46' }));
+      const f1 = RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' });
+      const f2 = Some(RefField({ doc: { name: stringField('Karin Fujiyoshi') }, id: '46' }));
       expect(isFieldEqual(f1, f2)).toStrictEqual(false);
     });
 
     it('returns false if given different subfield type', () => {
-      const f1 = RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' });
+      const f1 = RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' });
       const f2 = Some(RefField({ doc: { name: NumberField(19) }, id: '46' }));
       expect(isFieldEqual(f1, f2)).toStrictEqual(false);
     });
 
     it('returns false if given f2 none', () => {
-      const f1 = RefField({ doc: { name: StringField('Kira Masumoto') }, id: '46' });
+      const f1 = RefField({ doc: { name: stringField('Kira Masumoto') }, id: '46' });
       const f2 = None();
       expect(isFieldEqual(f1, f2)).toStrictEqual(false);
     });
