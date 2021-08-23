@@ -1,3 +1,5 @@
+import { _, E, Either } from 'kira-pure';
+
 import { Spec } from '../mod.g';
 
 export type Type = {
@@ -6,7 +8,7 @@ export type Type = {
   readonly spec: Spec.Count.Type;
 };
 
-export function newWith({
+export function from({
   data,
   spec,
 }: {
@@ -20,7 +22,7 @@ export function newWith({
   };
 }
 
-export function newFromDataWith(spec: Spec.Count.Type): (data: bigint) => Type {
+export function fromDataWith(spec: Spec.Count.Type): (data: bigint) => Type {
   return (data) => ({
     _type: 'Count',
     data,
@@ -28,12 +30,26 @@ export function newFromDataWith(spec: Spec.Count.Type): (data: bigint) => Type {
   });
 }
 
-export function newFromSpecWith(data: bigint): (spec: Spec.Count.Type) => Type {
+export function fromSpecWith(data: bigint): (spec: Spec.Count.Type) => Type {
   return (spec) => ({
     _type: 'Count',
     data,
     spec,
   });
+}
+
+export function intFromUnknown(u: unknown): Either<string, bigint> {
+  return typeof u === 'number' && Number.isInteger(u) ? E.right(BigInt(u)) : E.left('aa');
+}
+
+export function fromUnknown(u: unknown): Either<string, Type> {
+  return _(u)
+    ._((u) => {
+      const x = intFromUnknown(u as Type);
+      const y = intFromUnknown(u as Type);
+      return E.left('yaa');
+    })
+    ._v();
 }
 
 export function copy({

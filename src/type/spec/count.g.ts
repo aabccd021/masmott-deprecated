@@ -1,10 +1,15 @@
+import { _, E, Either, P, PE } from 'kira-pure';
+
+import { Str } from '../../kira/mod';
+import { FromUnknownReport } from '../../kira/str';
+
 export type Type = {
   readonly _type: 'Count';
   readonly countedCol: string;
   readonly groupByRef: string;
 };
 
-export function newWith({
+export function from({
   countedCol,
   groupByRef,
 }: {
@@ -16,6 +21,19 @@ export function newWith({
     countedCol,
     groupByRef,
   };
+}
+
+export function fromUnknown(u: unknown, trace: string): Either<FromUnknownReport, Type> {
+  return _(
+    P.tuple2(
+      Str.fromUnknown((u as Type).countedCol, 'countedCol'),
+      Str.fromUnknown((u as Type).groupByRef, 'groupByRef')
+    )
+  )
+    ._(PE.compact2)
+    ._(E.map2((countedCol, groupByRef) => from({ countedCol, groupByRef })))
+    ._(E.mapLeft(Str.addTrace(trace)))
+    ._v();
 }
 
 export function copy({

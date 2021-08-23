@@ -2,9 +2,9 @@ import { _ } from 'kira-pure';
 
 import { Field, Spec } from './type/mod.g';
 
-const field = Field.Count.newWith({
+const field = Field.Count.from({
   data: BigInt(10),
-  spec: Spec.Count.newWith({
+  spec: Spec.Count.from({
     countedCol: 'x',
     groupByRef: 'z',
   }),
