@@ -1,4 +1,4 @@
-import { ImageFieldValue } from './type/_data';
+import { ImageFieldValue } from './type/_type';
 
 export function isImageFieldValue(field: unknown): field is ImageFieldValue {
   const imageFieldValue = field as ImageFieldValue;

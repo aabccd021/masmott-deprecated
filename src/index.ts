@@ -1,5 +1,5 @@
 export * from './apply-doc-write';
-export * from './filter-synced-fields';
+export * from './type/_typeced-fields';
 export * from './is-field-equal';
 export * from './is-image-field';
 export * from './schema';

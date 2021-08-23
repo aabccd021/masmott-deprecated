@@ -1,5 +1,5 @@
 import { DocSnapshot } from '../../read-data-value';
-import { ImageFieldValue } from '../_data';
+import { ImageFieldValue } from '../_type';
 import * as Spec from '../spec/_union';
 
 export type Count = {

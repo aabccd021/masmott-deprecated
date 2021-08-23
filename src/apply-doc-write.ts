@@ -8,7 +8,7 @@ import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } fr
 export type ApplyDocWriteError = {
   readonly field: Option<Field>;
 };
-
+./type/_type
 export function ApplyDocWriteError(field: Option<Field>): ApplyDocWriteError {
   return { field };
 }

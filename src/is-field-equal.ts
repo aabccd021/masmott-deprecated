@@ -1,6 +1,6 @@
 import { Option, optionFold, optionFromNullable } from 'trimop';
 
-import { Field } from './type/_data';
+import { Field } from './type/_type';
 
 export function isFieldEqual(f1: Field, f2: Option<Field>): boolean {
   if (f1._type === 'Date') {

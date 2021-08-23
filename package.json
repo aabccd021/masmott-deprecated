@@ -163,6 +163,15 @@
       "import/no-named-default": "warn",
       "import/no-useless-path-segments": "warn",
       "no-null/no-null": "warn",
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            "_union",
+            "_type"
+          ]
+        }
+      ],
       "simple-import-sort/exports": "warn",
       "simple-import-sort/imports": "warn",
       "prettier/prettier": [

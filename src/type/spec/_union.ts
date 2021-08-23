@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ColRefer } from '../_data';
+import { ColRefer } from '../_type';
 import { SyncedFields } from '../alias';
 
 export type Count = {
