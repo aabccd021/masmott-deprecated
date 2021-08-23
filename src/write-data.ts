@@ -17,7 +17,6 @@ export type IncrementField = {
   readonly value: number;
 };
 
-
 export type WriteDoc = Dict<WriteField>;
 
 export function RefUpdateField(doc: WriteDoc): RefUpdateField {

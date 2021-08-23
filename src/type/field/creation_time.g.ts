@@ -6,4 +6,4 @@ export type Type = {
   readonly spec: Spec.CreationTime;
 };
 
-export type Z = Record<string, string>
+export type Z = Record<string, string>;

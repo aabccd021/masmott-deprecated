@@ -1,12 +1,4 @@
-import {
-  Either,
-  E,
-  None,
-  Option,
-  O,
-  Right,
-  Some,
-} from 'kira-pure';
+import { Either, None, Option, Right, Some } from 'kira-pure';
 
 import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } from './type/_data';
 
