@@ -1,5 +1,10 @@
-import * as Spec from '../../spec/mod';
-import { Type } from './mod';
+import * as Spec from '../spec/union';
+
+export type Type = {
+  readonly _type: 'Count';
+  readonly data: bigint;
+  readonly spec: Spec.Count;
+};
 
 export function newWith({
   data,
