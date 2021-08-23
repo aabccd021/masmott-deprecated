@@ -28,7 +28,7 @@ export function newFromDataWith(spec: Spec.Count.Type): (data: bigint) => Type {
   });
 }
 
-export function newFromSpecWith(data: bigint): (spec: Spec.Count) => Type {
+export function newFromSpecWith(data: bigint): (spec: Spec.Count.Type) => Type {
   return (spec) => ({
     _type: 'Count',
     data,
