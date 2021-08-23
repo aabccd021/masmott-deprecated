@@ -109,8 +109,8 @@
       },
       {
         "files": [
-          "src/sum-type/**/*.ts",
-          "src/type/**/*.ts"
+          "src/type/**/*.ts",
+          "src/_type/**/*.ts"
         ],
         "rules": {
           "import/no-cycle": "off"

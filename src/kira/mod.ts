@@ -1,3 +1,4 @@
+import * as I from './io';
 import * as Str from './str';
 
-export {Str};
+export { I, Str };

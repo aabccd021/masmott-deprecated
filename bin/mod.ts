@@ -1,12 +1,35 @@
 import { exec } from 'child_process';
 import * as fs from 'fs';
+import { _, IO } from 'kira-pure';
 
-const typeDir = './src/type';
+import { I } from '../src/kira/mod';
 
 function lowerFirst(string: string): string {
   const [f, ...rest] = string;
   return [f?.toLowerCase(), ...rest].join('');
 }
+
+type DirentType = 'file' | 'directory' | 'etc';
+
+type Dirent = {
+  readonly name: string;
+  readonly type: DirentType;
+};
+
+function readdir(dir: string): IO<readonly Dirent[]> {
+  return () =>
+    fs.readdirSync(dir, { withFileTypes: true }).map((d) => ({
+      name: d.name,
+      type: d.isDirectory() ? 'directory' : d.isFile() ? 'file' : 'etc',
+    }));
+}
+
+const typeDir = './src/type';
+
+_(typeDir)
+  ._(readdir)
+  ._(I.map((dirents) => {}))
+  ._v();
 
 fs.readdirSync(typeDir, { withFileTypes: true }).forEach((unionDirCandidate) => {
   if (unionDirCandidate.isDirectory()) {
