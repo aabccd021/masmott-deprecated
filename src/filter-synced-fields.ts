@@ -11,7 +11,7 @@ import {
   Some,
 } from 'trimop';
 
-import { Doc, Field, RefField } from './type/data';
+import { Doc, Field, RefField } from './type/_data';
 import { SyncedFields } from './type/sum/spec/union';
 
 // TODO: use option

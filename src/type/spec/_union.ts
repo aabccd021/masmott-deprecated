@@ -1,4 +1,5 @@
-import { ColRefer, SyncedFields } from '../../util';
+import { ColRefer } from '../_data';
+import { SyncedFields } from '../alias';
 
 export type Count = {
   readonly _type: 'Count';
@@ -32,4 +33,3 @@ export type String = {
   readonly _type: 'String';
 };
 
-export type Base = Count | CreationTime | Image | Owner | Ref | string;

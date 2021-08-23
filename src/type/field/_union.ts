@@ -1,6 +1,6 @@
 import { DocSnapshot } from '../../read-data-value';
-import * as Spec from '../spec/union';
-import { ImageFieldValue } from '../util';
+import { ImageFieldValue } from '../_data';
+import * as Spec from '../spec/_union';
 
 export type Count = {
   readonly data: bigint;

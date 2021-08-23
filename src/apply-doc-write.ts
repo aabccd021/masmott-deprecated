@@ -8,7 +8,7 @@ import {
   Some,
 } from 'kira-pure';
 
-import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } from './type/data';
+import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } from './type/_data';
 
 /**
  * ApplyDocWriteError
