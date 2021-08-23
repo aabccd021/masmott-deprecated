@@ -1,0 +1,11 @@
+{
+  "newImports": "import { DocSnapshot } from '../../read-data-value';\nimport { ImageFieldValue } from '../_data';\nimport * as Spec from '../spec/_union';\n\n",
+  "newTypes": [
+    "export type Type = {readonly _type: Count\n\n  readonly data: bigint,\n  readonly spec: Spec.Count,\n\n\n}",
+    "export type Type = {readonly _type: CreationTime\n\n  readonly data: Date,\n  readonly spec: Spec.CreationTime,\n\n\n}",
+    "export type Type = {readonly _type: Image\n\n  readonly data: ImageFieldValue,\n  readonly spec: Spec.Image,\n\n\n}",
+    "export type Type = {readonly _type: Owner\n\n  readonly data: DocSnapshot,\n  readonly spec: Spec.Owner,\n\n\n}",
+    "export type Type = {readonly _type: Ref\n\n  readonly data: DocSnapshot,\n  readonly spec: Spec.Ref,\n\n\n}",
+    "export type Type = {readonly _type: String\n\n  readonly data: string,\n  readonly spec: Spec.String,\n\n}"
+  ]
+}

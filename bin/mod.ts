@@ -1,32 +1,25 @@
-import * as ts from 'typescript';
 import * as fs from 'fs';
 
-// const source = fs.readFileSync('./src/type/field/_union.ts', {encoding: 'utf-8'});
+const typeDir = './src/type';
 
-// const result = ts.transpileModule(source, {});
-
-// console.log(JSON.stringify(result));
-
-// console.log(source);
-
-/**
- * Prints out particular nodes from a source file
- *
- * @param file a path to a file
- * @param identifiers top level identifiers available
- */
-function extract(file: string): void {
-  // Create a Program to represent the project, then pull out the
-  // source file to parse its AST.
-  const program = ts.createProgram([file], { allowJs: true });
-  const sourceFile = program.getSourceFile(file);
-  if (!sourceFile) {
-    throw Error();
+fs.readdirSync(typeDir, { withFileTypes: true }).forEach((x) => {
+  if (x.isDirectory()) {
+    const unionDirName = `${typeDir}/${x.name}`;
+    const [imports, ...types] = fs
+      .readFileSync(`${unionDirName}/_union.ts`, { encoding: 'utf-8' })
+      .split('export type ');
+    const newImports = imports?.split(';').join(';');
+    const newTypes = types.map((t) => {
+      const [name, st] = t.split(' = ');
+      const newSt = [
+        `readonly _type: ${name}`,
+        st?.replace(/{/g, '').replace(/};/g, '').split(';'),
+      ].join('\n');
+      return `export type Type = {${newSt}}`;
+    });
+    fs.writeFileSync(
+      `${unionDirName}/temp.json`,
+      JSON.stringify({ newImports, newTypes }, undefined, 2)
+    );
   }
-
-  fs.writeFileSync(file + '.txt',JSON.stringify(sourceFile, undefined, 2));
-
-  // To print the AST, we'll use TypeScript's printer
-}
-
-extract('./src/type/field/_union.ts');
+});

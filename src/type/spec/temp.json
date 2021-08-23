@@ -1,0 +1,11 @@
+{
+  "newImports": "import { ColRefer } from '../_data';\nimport { SyncedFields } from '../alias';\n\n",
+  "newTypes": [
+    "export type Type = {readonly _type: Count\n\n  readonly _type: 'Count',\n  readonly countedCol: string,\n  readonly groupByRef: string,\n\n\n}",
+    "export type Type = {readonly _type: CreationTime\n\n  readonly _type: 'CreationTime',\n\n\n}",
+    "export type Type = {readonly _type: Image\n\n  readonly _type: 'Image',\n\n\n}",
+    "export type Type = {readonly _type: Owner\n\n  readonly _type: 'Owner',\n  readonly ownerCol: string,\n  readonly syncedFields: SyncedFields,\n  readonly thisColRefers: readonly ColRefer[],\n\n\n}",
+    "export type Type = {readonly _type: Ref\n\n  readonly _type: 'Ref',\n  readonly refedCol: string,\n  readonly syncedFields: SyncedFields,\n  readonly thisColRefers: readonly ColRefer[],\n\n\n}",
+    "export type Type = {readonly _type: String\n\n  readonly _type: 'String',\n\n\n}"
+  ]
+}
