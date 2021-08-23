@@ -1,5 +1,5 @@
-import * as Field from './field/serializable_union';
-import * as Spec from './spec/serializable_union';
+import * as Field from './field/serializable';
+import * as Spec from './spec/serializable';
 export * from './alias';
 export * from './serializable';
 

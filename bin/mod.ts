@@ -16,7 +16,7 @@ type Dirent = {
   readonly type: DirentType;
 };
 
-function readdir(dir: string): IO<readonly Dirent[]> {
+function readDir(dir: string): IO<readonly Dirent[]> {
   return () =>
     fs.readdirSync(dir, { withFileTypes: true }).map((d) => ({
       name: d.name,
@@ -24,16 +24,25 @@ function readdir(dir: string): IO<readonly Dirent[]> {
     }));
 }
 
-const typeDir = './src/type';
+function readFile(path: string): IO<string> {
+  return () => fs.readFileSync(path, { encoding: 'utf-8' });
+}
 
-_(typeDir)
-  ._(readdir)
+function writeFile(path: string): (content: string) => IO<void> {
+  return (content) => () => fs.writeFileSync(path, content);
+}
+
+const sourceTypeDir = './src/_type';
+const compiledTypeDir = './src/__type';
+
+_(sourceTypeDir)
+  ._(readDir)
   ._(I.map((dirents) => {}))
   ._v();
 
-fs.readdirSync(typeDir, { withFileTypes: true }).forEach((unionDirCandidate) => {
+fs.readdirSync(sourceTypeDir, { withFileTypes: true }).forEach((unionDirCandidate) => {
   if (unionDirCandidate.isDirectory()) {
-    const unionDirName = `${typeDir}/${unionDirCandidate.name}`;
+    const unionDirName = `${sourceTypeDir}/${unionDirCandidate.name}`;
     const [imports, ...types] = fs
       .readFileSync(`${unionDirName}/_union.ts`, { encoding: 'utf-8' })
       .split('export type ');
