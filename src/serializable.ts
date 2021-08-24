@@ -1,6 +1,6 @@
 import { Dict, Option } from 'kira-pure';
 
-import { Field, Spec } from './mod';
+import { Field, Spec } from './entity/mod';
 
 export type SyncedFields = Dict<Option<SyncedFields>>;
 
