@@ -1,6 +1,6 @@
 import { Either, None, Option, Right, Some } from 'kira-pure';
 
-import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } from './type/_data';
+import { DateField, Doc, Field, NumberField, RefField, WriteDoc, WriteField } from './__type/_data';
 
 /**
  * ApplyDocWriteError

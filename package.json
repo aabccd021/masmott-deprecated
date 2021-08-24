@@ -158,7 +158,6 @@
         }
       ],
       "import/no-cycle": "warn",
-      "import/exports-last": "warn",
       "import/first": "warn",
       "import/no-named-default": "warn",
       "import/no-useless-path-segments": "warn",

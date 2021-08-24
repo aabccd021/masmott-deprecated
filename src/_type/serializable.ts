@@ -1,4 +1,10 @@
-import { ColReferFields, Doc } from './mod';
+import { Dict, Option } from 'kira-pure';
+
+import { Field, Spec } from './mod';
+
+export type SyncedFields = Dict<Option<SyncedFields>>;
+
+export type ColReferFields = Dict<SyncedFields>;
 
 export type ColRefer = {
   readonly colName: string;
@@ -15,7 +21,13 @@ export type DocKey = {
   readonly id: string;
 };
 
+export type Doc = Dict<Field.Type>;
+
 export type DocSnapshot = {
   readonly doc: Doc;
   readonly id: string;
 };
+
+export type ColSpec = Dict<Spec.Type>;
+
+export type AppSpec = Dict<ColSpec>;

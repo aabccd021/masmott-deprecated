@@ -1,25 +1,28 @@
-import { _, E, Either } from 'kira-pure';
+import { _, E, Either, O, Option } from 'kira-pure';
+import { none } from 'kira-pure/lib/option';
 
 import { Spec } from '../mod.g';
 
-export type Type = {
-  readonly _type: 'Count';
+export type Data = {
   readonly data: bigint;
   readonly spec: Spec.Count.Type;
 };
 
-export function from({
-  data,
-  spec,
-}: {
-  readonly data: bigint;
-  readonly spec: Spec.Count.Type;
-}): Type {
-  return {
-    _type: 'Count',
-    data,
-    spec,
-  };
+export type Branded = { readonly __FieldCount: unique symbol } & Data;
+
+export type Type = { readonly _type: 'Count' } & Branded;
+
+function isType(data: Data): data is Branded {
+  return true;
+}
+
+export function from(p: { readonly data: bigint; readonly spec: Spec.Count.Type }): Option<Type> {
+  return isType(p)
+    ? O.some({
+        _type: 'Count',
+        ...p,
+      })
+    : none;
 }
 
 export function fromDataWith(spec: Spec.Count.Type): (data: bigint) => Type {
