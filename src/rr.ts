@@ -1,4 +1,4 @@
 import { BrandedName } from './brand';
 
-const x: BrandedName = { first: 'aab', last: 'ccd' };
+const x = { first: 'aab', last: 'ccd' } as BrandedName;
 console.log(x);

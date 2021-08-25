@@ -1,4 +1,5 @@
-import { O, Option } from 'kira-pure';
+import type { Dict, Option } from 'kira-pure';
+import { O } from 'kira-pure';
 
 export type NameBrand = {
   readonly __NameBrand: unique symbol;
@@ -18,3 +19,13 @@ function isNonEmptyString(s: Name): s is BrandedName {
 export function makeNonEmptyString(s: string): Option<BrandedName> {
   return isNonEmptyString(s) ? O.some(s) : O.none;
 }
+
+export type Pointer = { readonly id: string } & { readonly __PointerBrand: unique symbol };
+
+const x: Pointer = { id: '1' };
+
+const y = true as Pointer;
+
+function f(z: Pointer): void {}
+
+const z: Dict<number> = { x: 10 };

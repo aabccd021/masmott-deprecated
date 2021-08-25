@@ -1,6 +1,6 @@
-import { DocSnapshot } from '../../../read-data-value';
-import { ImageFieldValue } from '../../util';
-import * as Spec from '../spec/union';
+import type { DocSnapshot } from '../../../read-data-value';
+import type { ImageFieldValue } from '../../util';
+import type * as Spec from '../spec/union';
 
 export type Count = {
   readonly _type: 'Count';
